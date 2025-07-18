@@ -236,6 +236,10 @@ export default function ParticleBackground() {
         draggedParticleRef.current.isDragging = false;
         draggedParticleRef.current = null;
       }
+      if (draggedConnectionRef.current) {
+        draggedConnectionRef.current.isDragging = false;
+        draggedConnectionRef.current = null;
+      }
     };
 
     const animate = () => {
