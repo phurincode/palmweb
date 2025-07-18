@@ -22,12 +22,12 @@ export default function Index() {
         {/* Text Content */}
         <div className="text-center space-y-2">
           {/* Hello with waving emoji */}
-          <h1 className="text-white text-2xl md:text-3xl font-light">
+          <h1 className="text-white text-2xl md:text-3xl font-bold">
             Hello <span className="inline-block animate-bounce">👋</span>
           </h1>
 
           {/* I'm */}
-          <h2 className="text-white text-xl md:text-2xl font-light">I'm</h2>
+          <h2 className="text-white text-xl md:text-2xl font-bold">I'm</h2>
 
           {/* Name with gradient */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
