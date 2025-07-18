@@ -113,7 +113,7 @@ export default function ParticleBackground() {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
       style={{
-        background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
+        background: "#000000",
       }}
     />
   );
