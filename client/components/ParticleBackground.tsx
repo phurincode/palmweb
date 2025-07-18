@@ -289,7 +289,8 @@ export default function ParticleBackground() {
         ctx.fill();
       });
 
-      // Draw connections
+      // Update connections array and draw connections
+      connectionsRef.current = [];
       particlesRef.current.forEach((particle, i) => {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const other = particlesRef.current[j];
@@ -298,11 +299,19 @@ export default function ParticleBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 100) {
+            // Add to connections array for interaction
+            connectionsRef.current.push({
+              particle1: particle,
+              particle2: other,
+              isDragging: false,
+              dragOffset: { x: 0, y: 0 },
+            });
+
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.6 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
