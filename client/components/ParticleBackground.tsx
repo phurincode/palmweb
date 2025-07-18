@@ -92,6 +92,65 @@ export default function ParticleBackground() {
       return nearest;
     };
 
+    const getDistanceFromPointToLine = (
+      px: number,
+      py: number,
+      x1: number,
+      y1: number,
+      x2: number,
+      y2: number,
+    ) => {
+      const A = px - x1;
+      const B = py - y1;
+      const C = x2 - x1;
+      const D = y2 - y1;
+
+      const dot = A * C + B * D;
+      const lenSq = C * C + D * D;
+      let param = -1;
+      if (lenSq !== 0) {
+        param = dot / lenSq;
+      }
+
+      let xx, yy;
+      if (param < 0) {
+        xx = x1;
+        yy = y1;
+      } else if (param > 1) {
+        xx = x2;
+        yy = y2;
+      } else {
+        xx = x1 + param * C;
+        yy = y1 + param * D;
+      }
+
+      const dx = px - xx;
+      const dy = py - yy;
+      return Math.sqrt(dx * dx + dy * dy);
+    };
+
+    const findNearestConnection = (mouseX: number, mouseY: number) => {
+      let nearest: Connection | null = null;
+      let minDistance = Infinity;
+
+      connectionsRef.current.forEach((connection) => {
+        const distance = getDistanceFromPointToLine(
+          mouseX,
+          mouseY,
+          connection.particle1.x,
+          connection.particle1.y,
+          connection.particle2.x,
+          connection.particle2.y,
+        );
+        if (distance < 10 && distance < minDistance) {
+          minDistance = distance;
+          nearest = connection;
+        }
+      });
+
+      return nearest;
+    };
+
     const handleMouseDown = (e: MouseEvent) => {
       const mouse = getMousePos(e);
       mouseRef.current = { ...mouse, isDown: true };
