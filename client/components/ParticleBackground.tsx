@@ -186,7 +186,7 @@ export default function ParticleBackground() {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - distance / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
