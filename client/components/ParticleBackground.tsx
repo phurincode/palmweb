@@ -155,10 +155,27 @@ export default function ParticleBackground() {
       const mouse = getMousePos(e);
       mouseRef.current = { ...mouse, isDown: true };
 
+      // First try to find a particle
       const nearestParticle = findNearestParticle(mouse.x, mouse.y);
       if (nearestParticle) {
         draggedParticleRef.current = nearestParticle;
         nearestParticle.isDragging = true;
+        return;
+      }
+
+      // If no particle found, try to find a connection
+      const nearestConnection = findNearestConnection(mouse.x, mouse.y);
+      if (nearestConnection) {
+        draggedConnectionRef.current = nearestConnection;
+        nearestConnection.isDragging = true;
+        nearestConnection.dragOffset = {
+          x:
+            mouse.x -
+            (nearestConnection.particle1.x + nearestConnection.particle2.x) / 2,
+          y:
+            mouse.y -
+            (nearestConnection.particle1.y + nearestConnection.particle2.y) / 2,
+        };
       }
     };
 
