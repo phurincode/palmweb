@@ -12,6 +12,13 @@ interface Particle {
   isDragging: boolean;
 }
 
+interface Connection {
+  particle1: Particle;
+  particle2: Particle;
+  isDragging: boolean;
+  dragOffset: { x: number; y: number };
+}
+
 export default function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
