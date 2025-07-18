@@ -201,6 +201,32 @@ export default function ParticleBackground() {
           particle.x = particle.originalX + Math.cos(angle) * maxDistance;
           particle.y = particle.originalY + Math.sin(angle) * maxDistance;
         }
+      } else if (mouseRef.current.isDown && draggedConnectionRef.current) {
+        const connection = draggedConnectionRef.current;
+        const centerX = mouse.x - connection.dragOffset.x;
+        const centerY = mouse.y - connection.dragOffset.y;
+
+        // Calculate the midpoint between the two particles
+        const originalCenterX =
+          (connection.particle1.originalX + connection.particle2.originalX) / 2;
+        const originalCenterY =
+          (connection.particle1.originalY + connection.particle2.originalY) / 2;
+
+        // Calculate offset from original center
+        const offsetX = centerX - originalCenterX;
+        const offsetY = centerY - originalCenterY;
+
+        // Limit drag distance for connections
+        const maxOffset = 80;
+        const offsetDistance = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+
+        if (offsetDistance <= maxOffset) {
+          // Move both particles by the offset
+          connection.particle1.x = connection.particle1.originalX + offsetX;
+          connection.particle1.y = connection.particle1.originalY + offsetY;
+          connection.particle2.x = connection.particle2.originalX + offsetX;
+          connection.particle2.y = connection.particle2.originalY + offsetY;
+        }
       }
     };
 
