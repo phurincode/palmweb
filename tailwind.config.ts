@@ -57,6 +57,9 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        gradient: {
+          "blue-cyan": "linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
