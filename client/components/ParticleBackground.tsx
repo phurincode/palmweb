@@ -25,6 +25,8 @@ export default function ParticleBackground() {
   const animationRef = useRef<number>();
   const mouseRef = useRef({ x: 0, y: 0, isDown: false });
   const draggedParticleRef = useRef<Particle | null>(null);
+  const draggedConnectionRef = useRef<Connection | null>(null);
+  const connectionsRef = useRef<Connection[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
